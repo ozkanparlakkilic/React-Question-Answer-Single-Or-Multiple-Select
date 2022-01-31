@@ -1,4 +1,4 @@
-selectAnswer = (index) => {
+selectAnswer = async (index) => {
     const tempAnswers = this.state.answers;
     const oldSelectedAnswerIndex = tempAnswers.findIndex(
       (answer) => answer.isSelected
@@ -10,27 +10,32 @@ selectAnswer = (index) => {
     if (tempAnswers[index].isSelected) {
       tempAnswers[index].isSelected = false;
 
-      this.setState({
+      await this.setState({
         answers: tempAnswers,
       });
+      // await your remove function  
       return;
     }
 
     if (selectionLimit == 1) {
       if (oldSelectedAnswerIndex === -1) {
         tempAnswers[index].isSelected = true;
-        this.setState({ answers: tempAnswers });
+        await this.setState({ answers: tempAnswers });
+          // await your add function 
         return;
       }
       tempAnswers[oldSelectedAnswerIndex].isSelected = false;
       tempAnswers[index].isSelected = true;
-      this.setState({ answers: tempAnswers });
+      await this.setState({ answers: tempAnswers });
+      // await your add function
+      // await your remove function
     }
 
     if (count < this.state.limit) {
       tempAnswers[index].isSelected = true;
-      this.setState({
+      await this.setState({
         answers: tempAnswers,
       });
+      // await your add function
     }
   };
